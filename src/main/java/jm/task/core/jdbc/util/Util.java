@@ -11,12 +11,16 @@ public class Util {
     private static final String DB_USERNAME = "root_r";
     private static final String DB_PASSWORD = "root_r";
 
-    public static Connection getConnection() throws ClassNotFoundException, SQLException {
+    public static Connection getConnection() throws RuntimeException {
         Connection connection = null;
-        Class.forName(DB_DRIVER);
-        connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-
+        try {
+            Class.forName(DB_DRIVER);
+            connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Database Driver not found", e);
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to create the database connection", e);
+        }
         return connection;
     }
-
 }
