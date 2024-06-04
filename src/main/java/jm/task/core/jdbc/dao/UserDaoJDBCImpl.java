@@ -12,7 +12,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     private final Connection connection;
 
-    public UserDaoJDBCImpl() throws SQLException, ClassNotFoundException {
+    public UserDaoJDBCImpl() {
         this.connection = Util.getConnection();
     }
 
