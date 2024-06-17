@@ -6,10 +6,10 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import jm.task.core.jdbc.model.User;
 
-public class Util {
-    private static final SessionFactory sessionFactory;
+public class HibernateUtil {
+    private SessionFactory sessionFactory;
 
-    static {
+    public HibernateUtil() {
         try {
             Configuration configuration = new Configuration();
             configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
@@ -32,7 +32,13 @@ public class Util {
         }
     }
 
-    public static SessionFactory getSessionFactory() {
+    public SessionFactory getSessionFactory() {
         return sessionFactory;
+    }
+
+    public void shutdown() {
+        if (sessionFactory != null) {
+            sessionFactory.close();
+        }
     }
 }
