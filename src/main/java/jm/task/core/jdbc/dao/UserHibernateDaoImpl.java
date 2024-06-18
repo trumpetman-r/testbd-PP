@@ -21,7 +21,6 @@ public class UserHibernateDaoImpl implements UserDao {
                         lastName VARCHAR(50),
                         age TINYINT
                     )""").executeUpdate();
-            transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -34,7 +33,6 @@ public class UserHibernateDaoImpl implements UserDao {
             session.createSQLQuery("""
                     DROP TABLE IF EXISTS USER
                     """).executeUpdate();
-            transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -84,7 +82,6 @@ public class UserHibernateDaoImpl implements UserDao {
             session.createSQLQuery("""
                     TRUNCATE TABLE USER
                     """).executeUpdate();
-            transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
